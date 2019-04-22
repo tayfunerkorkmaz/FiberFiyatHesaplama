@@ -5,12 +5,20 @@
  */
 package testpackage;
 
+import com.itextpdf.text.DocumentException;
+import defaultpackage.DocumentBuilder;
+import defaultpackage.DocumentInfo;
+import defaultpackage.DocumentManager;
+import defaultpackage.Kablo;
+import defaultpackage.KabloDto;
 import defaultpackage.KurAyarla;
 import defaultpackage.Satis;
 import defaultpackage.SiparisList;
+import defaultpackage.SiparisYazdir;
 import defaultpackage.TeklifList;
 import defaultpackage.Uretim;
 import defaultpackage.Urun;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,7 +33,7 @@ public class TestClass {
      * @param args the command line arguments
      * @throws java.lang.CloneNotSupportedException
      */
-    public static void main(String[] args) throws CloneNotSupportedException {
+    public static void main(String[] args) throws CloneNotSupportedException, FileNotFoundException, DocumentException {
         
         //Singleton Test
         KurAyarla kur = KurAyarla.CreateObject();
@@ -77,6 +85,14 @@ public class TestClass {
         teklifCopy.clone();
         System.out.println(ikincilTeklif.hashCode() == teklifCopy.hashCode());
         
+        //Builder
+        List<KabloDto> kablolar = new ArrayList();
+        kablolar.add(new KabloDto("Patch Cord", "Simplex", "SingleMode", "FC-APC", "SC-APC", "1800 mikron", 0));
+        DocumentInfo documentInfo = new DocumentInfo("Tayfun Erkorkmaz", "05551234567", "İstanbul/Kadıköy", 5, kablolar );
+        
+        DocumentBuilder builder = new SiparisYazdir(documentInfo, "Tayfun Erkorkmaz");
+        DocumentManager manager = new DocumentManager(builder);
+        manager.build();
         
         
         
