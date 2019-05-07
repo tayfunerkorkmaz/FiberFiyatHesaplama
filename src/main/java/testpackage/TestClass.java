@@ -12,6 +12,9 @@ import defaultpackage.DocumentManager;
 import defaultpackage.Kablo;
 import defaultpackage.KabloDto;
 import defaultpackage.KurAyarla;
+import defaultpackage.Musteri;
+import defaultpackage.MusteriCollection;
+import defaultpackage.Iterator;
 import defaultpackage.Satis;
 import defaultpackage.SiparisList;
 import defaultpackage.SiparisYazdir;
@@ -94,6 +97,14 @@ public class TestClass {
         DocumentManager manager = new DocumentManager(builder);
         manager.build();
         
+         MusteriCollection mc = new MusteriCollection(); 
+         Iterator iterator = mc.createIterator();
+         
+         while (iterator.hasNext())
+         { 
+            Musteri m = (Musteri)iterator.next(); 
+            System.out.println(m.getAdSoyad() + " " + m.getFirma() + " " + m.getMail() + " " + m.getTel()); 
+        } 
         
         
     }
