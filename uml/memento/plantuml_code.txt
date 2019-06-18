@@ -1,0 +1,64 @@
+@startuml
+
+class Kablo{
+- kabloTip: String
+- kabloYapi: String
+- fiberTip: String
+- sagKonnektor: String
+- solKonnektor: String
+- kabloCapi: String
+- kabloMetre: int
++ Kablo(kabloTip: String, kabloYapi: String, fiberTip: String, sagKonnektor: String, solKonnektor: String, kabloCapi: String, kabloMetre: int)
++ getKabloTip(): String
++ setKabloTip(kabloTip: String): void
++ getKabloYapi(): String
++ setKabloYapi(kabloYapi: String): void
++ getFiberTip(): String
++ setFiberTip(fiberTip: String): void
++ getSagKonnektor(): String
++ setSagKonnektor(sagKonnektor: String): void
++ getSolKonnektor(): String
++ setSolKonnektor(solKonnektor: String): void
++ getKabloCapi(): String
++ setKabloCapi(kabloCapi: String): void
++ getKabloMetre(): int
++ setKabloMetre(kabloMetre: int): void
++ bindMemento(kablo: KabloMemento): void
++ createMemento(): KabloMemento
+}
+
+class KabloMemento{
+- kabloTip: String
+- kabloYapi: String
+- fiberTip: String
+- sagKonnektor: String
+- solKonnektor: String
+- kabloCapi: String
+- kabloMetre: int
++ getKabloTip(): String
++ setKabloTip(kabloTip: String): void
++ getKabloYapi(): String
++ setKabloYapi(kabloYapi: String): void
++ getFiberTip(): String
++ setFiberTip(fiberTip: String): void
++ getSagKonnektor(): String
++ setSagKonnektor(sagKonnektor: String): void
++ getSolKonnektor(): String
++ setSolKonnektor(solKonnektor: String): void
++ getKabloCapi(): String
++ setKabloCapi(kabloCapi: String): void
++ getKabloMetre(): int
++ setKabloMetre(kabloMetre: int): void
+}
+
+class KabloMemory {
++ kabloKopya: KabloMemento
++ getKabloKopya() : KabloMemento
++ setKabloKopya(kabloKopya: KabloMemento): void
+}
+
+KabloMemory --> KabloMemento
+Kablo --> KabloMemento
+
+
+@enduml

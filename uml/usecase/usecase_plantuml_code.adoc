@@ -1,0 +1,121 @@
+
+=== Version 1
+
+[uml]
+----
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor customer
+actor satis_elemani
+actor producer_manager
+rectangle fiber {
+ customer -- (Login)
+  satis_elemani -- (Login)
+  producer_manager -- (Login)
+  customer -- (Kayıt Ol)
+  customer -- (Ürün Türet)
+  customer -- (Sepeti Gör)
+  customer -- (Sepete Ekle)
+  (Sepeti Gör) .down.> (Proforma Oluştur) : <<uses>>
+  satis_elemani -- (Ürün Türet)
+  satis_elemani -- (Sepete Ekle)
+  satis_elemani  -- (Sepeti Gör)
+  producer_manager -- (Ürün Ekle)
+  producer_manager -- (Fiyat Değiştir)
+}
+@enduml
+
+----
+
+
+=== Version 2
+
+[uml]
+----
+@startuml
+left to right direction
+skinparam packageStyle rectangle
+actor customer
+actor satis_elemani
+actor producer_manager
+rectangle fiber {
+  customer -- (Ürün Türet)
+  (Ürün Türet) .down.> (Sepete Ekle) : <<include>>
+  customer -- (Sepeti Değiştir)
+  customer -- (Sepeti Gör)
+  (Sepeti Gör) .down.> (Teklif Oluştur) : <<include>>
+  (Sepeti Değiştir) .down.> (Ürün Sil) : <<uses>>
+  (Sepeti Değiştir) .down.> (Ürün Miktar Degistir) : <<uses>>
+  satis_elemani -- (Login)
+  satis_elemani -- (Ürün Türet)
+  satis_elemani -- (Sepeti Değiştir)
+  satis_elemani -- (Müşteri Değiştir)
+  (Müşteri Değiştir) .down.> (Müşteri Bul): <<extends>>
+  (Müşteri Bul) <.down. (İsme Göre Ara) : <<extends>>
+  (Müşteri Bul) <.down. (Firmaya Göre Ara) : <<extends>>
+  (Müşteri Bul) <.down. (Müşteri Sil): <<uses>>
+  (Teklif Oluştur) .down.> (İsme Göre ara): <<uses>>
+  satis_elemani -- (Müşteri Oluştur)
+  producer_manager -- (Login)
+  producer_manager -- (Ürün Ekle)
+  producer_manager -- (Fiyat Değiştir)
+  (Fiyat Değiştir) .down.> (Ürün Bul) : <<uses>>
+  (Ürün Bul) .down.> (Ürün Tipene Göre) : <<extends>>
+  (Ürün Bul) .down.> (Ürünlerden Sil) : <<uses>>
+}
+@enduml
+
+----
+
+=== Version 3
+
+[uml]
+----
+@startuml
+left to right direction
+actor customer
+actor satis_elemani
+actor producer_manager
+skinparam packageStyle rectangle
+rectangle fiber {
+  customer - (Login)
+  customer - (Kayıt Ol)
+  customer -- (Ürün Türet)
+  (Ürün Türet) .down.> (Sepete Ekle) : <<include>>
+  customer -- (Sepeti Değiştir)
+  customer -- (Sepeti Gör)
+  (Sepeti Gör) .down.> (Teklif İste) : <<include>>
+  (Sepeti Değiştir) .down.> (Ürün Sil) : <<uses>>
+  (Sepeti Değiştir) .down.> (Ürün Miktar Degistir) : <<uses>>
+  satis_elemani -- (Ürün Türet)
+  (Sepeti Gör) .down.> (Teklif Oluştur) : <<include>>
+  satis_elemani -- (Teklifleri Gör)
+  satis_elemani -- (Sepeti Değiştir)
+  (Teklifleri Gör) .down.> (Teklifi Bul) : <<uses>>
+  (Teklifi Bul) <.down. (Müşteri İsmine Göre) : <<extends>>
+  (Teklifi Bul) <.down. (Müşteri Firmasına Göre) : <<extends>>
+  satis_elemani -- (Müşteri Değiştir)
+  satis_elemani - (Login)
+  (Müşteri Değiştir) .down.> (Müşteri Bul): <<extends>>
+  (Müşteri Bul) <.down. (İsme Göre Ara) : <<extends>>
+  (Müşteri Bul) <.down. (Firmaya Göre Ara) : <<extends>>
+  (Müşteri Bul) <.down. (Müşteri Sil): <<uses>>
+  (Teklifleri Gör) .down.> (Teklifi Sil) : <<uses>>
+  (Teklif Oluştur) .down.> (İsme Göre ara): <<uses>>
+  satis_elemani -- (Müşteri Oluştur)
+  producer_manager - (Login)
+  producer_manager -- (Ürün Ekle)
+  (Ürün Ekle) .down.> (Konektor Tip) : <<extends>>
+  (Ürün Ekle) .down.> (Fiber Tip) : <<extends>>
+  (Ürün Ekle) .down.> (Fiber Yapı) : <<extends>> 
+  producer_manager -- (Fiyat Değiştir)
+  (Fiyat Değiştir) .down.> (Ürün Bul) : <<uses>>
+  (Ürün Bul) <.down. (Ürün Tipene Göre) : <<extends>>
+  (Ürün Bul) <.down. (Ürün İsmine Göre) : <<extends>>
+  (Ürün Bul) .down.> (Ürünlerden Sil) : <<uses>>
+  (Ürün Bul) .down.> (Ürün Fiyat Değiştir) : <<uses>>
+}
+@enduml
+
+----

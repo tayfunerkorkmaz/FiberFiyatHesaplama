@@ -1,0 +1,40 @@
+@startuml
+
+interface Subject{
++ registerObserver(o: Observer): void
++ removeObserver(o: Observer): void 
++ notifyObservers(): boolean
+}
+
+interface Observer {
++ update(dolarKur: double, euroKur: double): boolean
+}
+
+class KurData{
+- observers: ArrayList
+- dolarKur: double
+- euroKur: double
++ KurData()
++ registerObserver(o: Observer): void
++ removeObserver(o: Observer): void 
++ notifyObservers(): boolean
++ kurChanged(): void 
++ setKur(dolarKur: double, euroKur: double): void
++ getDolarKur(): double
++ getEuroKur(): double  
+}
+
+class KurObserver{
+- dolarKur: double
+- euroKur: double
+- kurData: KurData
++ KurObserver(kurData: KurData)
++ update(dolarKur: double, euroKur: double): boolean
+}
+
+KurData .up.|> Subject
+KurObserver .up.|> Observer
+KurObserver -> KurData
+
+
+@enduml

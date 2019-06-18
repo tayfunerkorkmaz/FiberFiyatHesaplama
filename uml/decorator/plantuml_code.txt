@@ -1,0 +1,33 @@
+@startuml
+skinparam componentStyle uml2
+ 
+interface Odeme
+class KKarti
+class Havale
+abstract class OdemeDecorator
+class EuroOdemeDecorator
+class DolarOdemeDecorator
+ 
+Odeme : +ode()
+ 
+KKarti : +ode()
+
+Havale : +ode()
+
+OdemeDecorator : +ode()
+OdemeDecorator : #Odeme: decoratedOdeme
+ 
+EuroOdemeDecorator : +ode()
+EuroOdemeDecorator : +setDoviz()
+
+DolarOdemeDecorator : +ode()
+DolarOdemeDecorator : +setDoviz()
+ 
+Odeme <|.. KKarti
+Odeme <|.. Havale
+Odeme <|.. OdemeDecorator
+OdemeDecorator <|-- EuroOdemeDecorator
+OdemeDecorator <|-- DolarOdemeDecorator
+OdemeDecorator -> Odeme : decoratedOdeme
+ 
+@enduml

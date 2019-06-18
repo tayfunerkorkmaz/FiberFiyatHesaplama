@@ -1,0 +1,43 @@
+@startuml
+title Object Pool
+class DatabaseConfigurationSingletonClass{
+{static} - dbconfig: DatabaseConfigurationSingletonClass
+{static} - lock_obj: Object
+- driver: String
+- dsn : String
+- usr : String
+- pwd : String
+- DatabaseConfigurationSingletonClass()
+{static} + getInstance(): DatabaseConfigurationSingletonClass
++ getDriver() : String
++ setDriver(driver: String) : void
++ getDsn() : String
++ setDsn(dsn : String) : void
++ getUsr() : String
++ setUsr(usr: String) : void
++ getPwd() : String
++ setPwd(pwd: String) : void
+}
+
+abstract class ObjectPool{
+- expirationTime: long;
+- locked : Hashtable<T, Long>
+- unlocked : Hashtable<T, Long>
++ public ObjectPool()
+# {abstract} create() : T 
++ {abstract} validate(o: T) : boolean
++ {abstract} expire(o: T): void
++ checkIn(t: T): void
+}
+
+class JDBCConnectionPool{
+- cfg: DatabaseConfigurationSingletonClass;
++ JDBCConnectionPool()
+# create(): Connection
++ expire(o: Connection): void
++ validate(o: Connection): boolean
+}
+
+JDBCConnectionPool --|> ObjectPool
+JDBCConnectionPool .up.> DatabaseConfigurationSingletonClass
+@enduml

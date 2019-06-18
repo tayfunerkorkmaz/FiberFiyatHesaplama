@@ -1,0 +1,90 @@
+@startuml
+ 
+title Builder
+ 
+class DocumentManager{
++ DocumentManager(builder: DocumentBuilder)
++ build() : void
+}
+
+abstract class DocumentBuilder {
+# documentInfo: DocumentInfo
++ DocumentBuilder(documentInfo: DocumentInfo)
++ {abstract} buildDocument(): void 
++ {abstract} buildHeader(): void
++ {abstract} buildContents(): void
++ {abstract} buildFooter(): void
+}
+
+class DocumentInfo{
+- musteriAdi: String
+- musteriTel: String
+- musteriAdres: String
+- kablolar: List<Kablo> 
++ DocumentInfo(musteriAdi: String, musteriTel: String, musteriAdres: String, kablolar: List<Kablo>)
++ getMusteriAdi(): String
++ setMusteriAdi(musteriAdi: String): void
++ getMusteriTel(): String
++ setMusteriTel(musteriTel: String): void
++ getMusteriAdres():String
++ setMusteriAdres(musteriAdres: String):void
++ getKablolar(): List<Kablo>
++ setKablolar(kablolar: List<Kablo>): void
+}
+
+class TeklifYazdir{
+- document: Document 
+- font: Font
+- name: String
+- bosluk: Pragraph
++ TeklifYazdir(documentInfo: DocumentInfo, name: String)
++ buildHeader(): void
++ buildContents(): void
++ buildFooter(): void
+}
+
+class Kablo{
+- kabloTip: String
+- kabloYapi: String
+- fiberTip: String
+- sagKonnektor: String
+- solKonnektor: String
+- kabloCapi: String
+- kabloMetre: int
++ Kablo(kabloTip: String, kabloYapi: String, fiberTip: String, sagKonnektor: String, solKonnektor: String, kabloCapi: String, kabloMetre: int)
++ getKabloTip(): String
++ setKabloTip(kabloTip: String): void
++ getKabloYapi(): String
++ setKabloYapi(kabloYapi: String): void
++ getFiberTip(): String
++ setFiberTip(fiberTip: String): void
++ getSagKonnektor(): String
++ setSagKonnektor(sagKonnektor: String): void
++ getSolKonnektor(): String
++ setSolKonnektor(solKonnektor: String): void
++ getKabloCapi(): String
++ setKabloCapi(kabloCapi: String): void
++ getKabloMetre(): int
++ setKabloMetre(kabloMetre: int): void
+}
+
+class SiparisYazdir{
+- document: Document 
+- font: Font
+- name: String
+- bosluk: Pragraph
++ SiparisYazdir(documentInfo: DocumentInfo, name: String)
++ buildHeader(): void
++ buildContents(): void
++ buildFooter(): void
+}
+
+
+DocumentManager o-- DocumentBuilder
+DocumentBuilder <|-- TeklifYazdir
+DocumentBuilder <|-- SiparisYazdir
+DocumentInfo --> Kablo
+DocumentInfo <-down- TeklifYazdir
+DocumentInfo <-down- SiparisYazdir
+
+@enduml

@@ -1,0 +1,84 @@
+@startuml
+title Prototype
+abstract class Kablo {
+
+- kabloTip: String
+- kabloYapi: String
+- fiberTip: String
+- sagKonnektor: String
+- solKonnektor: String
+- kabloCapi: String
+- kabloMetre: int
+
+# Kablo(kabloTip:String, kabloYapi:String, fiberTip:String, sagKonnektor:String, solKonnektor:String, kabloCapi:String, kabloMetre:int)
++ getKabloTip(): String
++ setKabloTip(kabloTip: String): void
++ getKabloYapi(): String
++ setKabloYapi(kabloYapi: String): void
++ getFiberTip(): String
++ setFiberTip(fiberTip: String): void
++ getSagKonnektor(): String
++ setSagKonnektor(sagKonnektor: String): void
++ getSolKonnektor(): String
++ setSolKonnektor(solKonnektor: String): void
++ getKabloCapi(): String
++ setKabloCapi(kabloCapi: String): void
++ getKabloMetre(): int
++ setKabloMetre(kabloMetre: int): void
+}
+
+class Satis{
+- musteriAdi: String
+- musteriNo: String
+- sirketAdi: String
+- sirketNo: String 
+- urunler: List<Urun>
+- toplamFiyat: double
+
++ Satis(musteriAdi: String, musteriNo: String, sirketAdi: String, sirketNo: String, urunler:List<Urun>, toplamFiyat:double)
+
++ getMusteriAdi(): String
++ setMusteriAdi(musteriAdi: String): void
++ getMusteriNo(): String
++ setMusteriNo(): void
++ getSirketAdi(): String
++ setSirketAdi(): void
++ getSirketNo(): String
++ setSirketNo(): void
++ getUrunler(): List<Urun>
++ setUrunler(): void
++ getToplamFiyat(): double
++ setToplamFiyat(): void
++ clone(): Object
+}
+
+class TeklifList{
+- teklif: List<Satis>
++ TeklifList()
++ TeklifList(musteriAdi: String, musteriNo: String, sirketAdi: String, sirketNo: String, urunler:List<Urun>, toplamFiyat:double)
++ TeklifList(s: TeklifList)
++ getTeklif(): List<Satis>
++ setTeklif(teklif: List<Satis>): void
++ Print():void
+}
+
+class SiparisList{
+- siparis: List<Satis>
++ SiparisList()
++ SiparisList(musteriAdi: String, musteriNo: String, sirketAdi: String, sirketNo: String, urunler:List<Urun>, toplamFiyat:double)
++ SiparisList(s: SiparisList)
++ getSiparis(): List<Satis>
++ setSiparis(siparis: List<Satis>): void
++ Print():void
+}
+
+class Urun {
+#Urun(musteriAdi: String, musteriNo: String, sirketAdi: String, sirketNo: String, urunler:List<Urun>, toplamFiyat:double)
+}
+
+Urun --|> Kablo
+Satis <|-- SiparisList
+Satis <|-- TeklifList
+Satis -right-> Urun
+
+@enduml

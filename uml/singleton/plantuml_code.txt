@@ -1,0 +1,14 @@
+@startuml
+title Singleton
+ 
+class KurAyarla{
+ {static} - kur
+ - dolar: double
+ - euro : double
+ {static} + getInstance() : KurAyarla
+ +getDolar()
+ +setDolar()
+ +getEuro()
+ +setEuro()
+}
+@enduml

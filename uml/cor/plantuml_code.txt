@@ -1,0 +1,29 @@
+@startuml
+title CoR
+skinparam componentStyle uml2
+
+abstract class OdemeHandler
+class Musteri
+class Siparis
+class Urunler
+
+OdemeHandler : setNextChain()
+OdemeHandler : process()
+
+Musteri : - OdemeHandler : nextInChain
+Musteri : +setNextChain()
+Musteri : +process()
+
+Siparis : - OdemeHandler : nextInChain
+Siparis : +setNextChain()
+Siparis : +process()
+
+Urunler : - OdemeHandler : nextInChain
+Urunler : +setNextChain()
+Urunler : +process()
+
+OdemeHandler <|-- Musteri
+OdemeHandler <|-- Siparis
+OdemeHandler <|-- Urunler
+ 
+@enduml

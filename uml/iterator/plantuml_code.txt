@@ -1,0 +1,33 @@
+@startuml
+title Iterator
+interface Collection
+class Client
+interface Iterator
+together {
+class MusteriCollection
+class MusteriIterator
+}
+ 
+Collection  : + createIterator()
+
+Iterator : + hasNext()
+Iterator : + next()
+
+MusteriIterator : + hasNext() : boolean
+MusteriIterator : + next() : Musteri
+MusteriIterator : - musteriList
+
+MusteriCollection : + createIterator() : Iterator
+MusteriCollection : - {static}  MAX_ITEMS
+MusteriCollection : - numberOfItems
+MusteriCollection : - musteriList
+MusteriCollection : + addItem() : void
+
+Client : + printMusteriler() : void
+Collection  <- Client 
+Client -> Iterator
+MusteriCollection -> MusteriIterator
+Iterator <|.. MusteriIterator
+Collection  <|.. MusteriCollection
+ 
+@enduml
